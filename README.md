@@ -1,54 +1,73 @@
+# React + TypeScript + Vite
 
-# 🎬 Movie Ticket App
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 📌 Opgavebeskrivelse
+Currently, two official plugins are available:
 
-I denne opgave skal I udvikle en **web-applikation til booking af biografbilletter**. Applikationen skal følge det medfølgende design, som er udarbejdet i Figma, og som dækker hele brugerrejsen fra filmudforskning til billetkøb og visning af e-billet.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-I må arbejde **alene eller i en 2-personers gruppe**.
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 🎯 Formål
+## Expanding the ESLint configuration
 
-Formålet med opgaven er at:
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-- Øve jer i at omsætte et UI-design til en funktionel webapplikation.
-- Arbejde med routing, state management og dynamisk rendering.
-- Integrere formularer og brugerinteraktioner.
-- Øve jer i versionsstyring og samarbejde via Git og GitHub.
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
----
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-## 🛠️ Krav
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-- Applikationen skal være bygget med **HTML, CSS og JavaScript** (evt. med et framework som React eller NextJS).
-- Designet fra Figma skal følges så tæt som muligt.
-- Der skal være **routing** mellem de forskellige sider.
-- Brugeren skal kunne **vælge sæder**, **gennemføre en betaling** (simuleret), og **modtage en billet**.
-- Inputfelter skal valideres
-- Der skal være en **live version** af jeres løsning, hostet på fx Render.com, GitHub Pages, Netlify eller lignende.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
----
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-# 🌟 Ekstra Opgaver:
-
-- **Opret bruger**: En formular hvor brugeren kan registrere sig med navn, e-mail og adgangskode.
-- **Log ind**: En login-side hvor brugeren kan logge ind med e-mail og adgangskode.
-- **Session-håndtering**: Når brugeren er logget ind, skal appen kunne huske brugeren.
-- **Log ud**: Mulighed for at logge ud igen.
-- **Gemte planer og billetter**: Disse skal kun være tilgængelige for den bruger, der er logget ind.
-
----
-
-## ✅ Aflevering
-
-1. Lav en **pull request** til `main` branch'en i jeres repository.
-2. Inkludér et link til den **live version** af jeres web-app i pull request-beskrivelsen og i denne README-fil under afsnittet "Live Demo".
-
----
-
-## 🌐 Live Demo
-
-> Indsæt link til jeres hostede version her, fx:
-> [https://biografbooking.netlify.app](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
