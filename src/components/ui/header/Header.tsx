@@ -1,33 +1,40 @@
-import { Link } from "react-router-dom"
-import BtnLogin from "../../base/BtnLogin"
-import not_logged_icon from "/src/assets/not_logged_icon.png"
-
-
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Header() {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // Map routes to their display text and icons
+    function getPageInfo() {
+        switch (location.pathname) {
+            case "/explore":
+                return { title: "Explore", icon: "/src/assets/explore.png" };
+            case "/saved-plans":
+                return { title: "Saved Plans" };
+            case "/profile":
+                return { title: "Settings" };
+
+            case "/details":
+                return { title: "Details Movie", icon: "/src/assets/saved_plans.png" };
+
+            default:
+                return { title: "Page", icon: "/src/assets/default-icon.png" };
+        }
+    };
+
+    // const {title} = getPageInfo();
+    // const icon = getPageInfo().icon;
+    const { title, icon } = getPageInfo();
 
     return (
-        <>
-
-
-
-            <header className="flex items-center justify-between mx-2 mt-2 mb-5 ">
-
-                <div className=" text-primary_4 ml-2">
-                    <Link to="/" ><p className="mb-2">Phong's Bio</p></Link>
-                <BtnLogin />
-                </div>
-
-                <div>
-                    <figure className="w-18 h-18">
-                        <img src={not_logged_icon} alt="Home" />
-                    </figure>
-                   
-                </div>
-
-            </header>
-        </>
-    )
+        <header className="flex justify-between mb-6">
+            <button onClick={() => navigate(-1)}>
+                <img src="/src/assets/btn-back.png" alt="Go back" />
+            </button>
+            <h1>{title}</h1>
+            <div className="w-6 h-6">
+                {icon && <img src={icon} alt={title} />}
+            </div>
+        </header>
+    );
 }
-
-

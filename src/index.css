@@ -1,25 +1,34 @@
 @import "tailwindcss";
 
+
 @theme {
   /* Fonts */
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'Fira Code', monospace;
-
+  
   /* Colors */
   --color-primary_1: #1B1E25;
   --color-primary_2: #32363D;
   --color-primary_3: #6F7277;
   --color-primary_4: #AFAFAF;
-
+  
   --color-secondary_1: #54A8E5;
   --color-secondary_2: #FFEFE9;
   --color-accent_1: #00C2FF;
   --color-accent_2: #E8F9FF;
   --color-neutral_1: #213547;
   --color-neutral_2: #F9F9F9;
-
+  
+  
+ --spacing-page_margin: 1.5rem;
 }
+
+@utility right-edge-sticky {
+  margin-right: calc(var(--spacing-page_margin) * -1);
+}
+
+
 
 body {
   background-color: var(--color-primary_1);
@@ -27,9 +36,24 @@ body {
 }
 
 
+ h1 {
+  @apply text-lg font-bold text-white;
+
+}
+
+@utility h2 {
+  @apply text-2xl font-bold;
+
+}
+
+@utility h3 {
+  @apply text-xl font-bold;
+
+}
 
 
-/* responsive */
+
+
 
 /* @utility content-width {
   @apply max-w-[800px] container mx-auto;

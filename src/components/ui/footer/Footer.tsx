@@ -1,11 +1,11 @@
-import Navbar from "../navbar/Navbar"
+import FooterNav from "../navbar/FooterNav"
 
 
 export default function Footer() {
 
     return (
         <>
-            <Navbar />
+            <FooterNav />
         </>
     )
 }

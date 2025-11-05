@@ -1,4 +1,4 @@
-import Newsletter from "../sections/NewsletterSection"
+import Newsletter from "./NewsletterSection"
 
 
 export default function NewsletterSection() {
