@@ -1,11 +1,16 @@
+import { useLoaderData } from "react-router";
+import { type Movie } from "../Types";
+import MovieDetailSection from "../components/sections/MovieDetailSection";
+
 export default function Details() {
+    // 🎯 Get both movieDetail and images from loader
+    const { movieDetail, images } = useLoaderData() as { movieDetail: Movie; images: any };
 
     return (
         <>
-            <h2>Details</h2>
-            <div className="h-60 bg-green-100">
-                Details information PLACEHOLDER
-            </div>
+            <title>Min Biograf - Details</title>
+
+            <MovieDetailSection movieDetailData={movieDetail} movieImages={images} />
         </>
-    )
+    );
 }

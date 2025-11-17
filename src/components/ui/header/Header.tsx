@@ -6,19 +6,26 @@ export default function Header() {
 
     // Map routes to their display text and icons
     function getPageInfo() {
+        // Check for dynamic routes first
+        if (location.pathname.startsWith("/movie/")) {
+            return { title: "Movie detail", icon: "/src/assets/saved_plans.png" };
+        }
+        if (location.pathname.startsWith("/select-seats/")) {
+            return { title: "Select Seats", icon: "/src/assets/ticket.png" }; // Use your ticket icon
+        }
+
+
         switch (location.pathname) {
+            case "/":
+                return { title: "Home", icon: "/src/assets/home-icon.png" };
             case "/explore":
                 return { title: "Explore", icon: "/src/assets/explore.png" };
             case "/saved-plans":
                 return { title: "Saved Plans" };
             case "/profile":
                 return { title: "Settings" };
-
-            case "/details":
-                return { title: "Details Movie", icon: "/src/assets/saved_plans.png" };
-
             default:
-                return { title: "Page", icon: "/src/assets/default-icon.png" };
+                return { title: "Page Not Found", icon: "/src/assets/default-icon.png" };
         }
     };
 
@@ -27,13 +34,13 @@ export default function Header() {
     const { title, icon } = getPageInfo();
 
     return (
-        <header className="flex justify-between mb-6">
-            <button onClick={() => navigate(-1)}>
-                <img src="/src/assets/btn-back.png" alt="Go back" />
+        <header className="flex items-center justify-between mb-6">
+            <button onClick={() => navigate(-1)} className="flex items-center">
+                <img src="/src/assets/btn-back.png" alt="Go back" className="w-6 h-6 object-contain" />
             </button>
             <h1>{title}</h1>
-            <div className="w-6 h-6">
-                {icon && <img src={icon} alt={title} />}
+            <div className="w-6 h-6 flex items-center justify-center">
+                {icon && <img src={icon} alt={title} className="w-full h-full object-contain" />}
             </div>
         </header>
     );

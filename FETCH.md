@@ -1,81 +1,140 @@
-# HOW TO FETCH:
-(TYPESCRIPT)
-opret en type.ts fil under src.
-den fil skal fungere som en hub der angiver hvilken datatyper der bruges.
-på denne måde har du et samlet sted hvorfra du kan exportere erklæringen af datatype til relevante filer som skal bruge det:
-```ts
-export type Agent = {
-    id: string | number;
-    name: string;
-    email: string;
-    phone: string | number;
-}
+# GUIDE: FETCH OG LOADER I REACT ROUTER
+**Kronologisk guide fra start til slut**
 
+---
+
+## 📋 OVERSIGT - DATA FLOW
+```
+API → Loader → Router → Page → Section → Component
 ```
 
-1.
-opret fil i component/common mappen. Kald den XxxFetchShell.tsx
-importerer useLoaderData fra react og erklæring af datatyperne fra type.ts.
-opret en et component (snippet ncmp) med en fallback function og en container som skal huse indholdet fra din fetch.
-De forskellige endpoints skal du bruge fra relavant api.
+---
+
+## TRIN 1: DEFINER DATATYPER
+**Fil:** `src/Types.ts`  
+**Hvorfor først?** Så TypeScript ved hvad du arbejder med
+
+```ts
+export type Agent = {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+}
+
+export type Movie = {
+    id: number;
+    title: string;
+    poster_path: string | null;
+    release_date: string;
+    overview: string;
+}
+```
+
+---
+
+## TRIN 2: OPRET LOADER (FETCH DATA)
+**Fil:** `src/loaders/AgentLoader.tsx`  
+**Hvad gør den?** Henter data fra API
+
+```ts
+import { type Agent } from "../Types"
+
+export async function AgentLoader(): Promise<{ agents: Agent[] }> {
+    const response = await fetch('https://dinmaegler.onrender.com/agents?_limit=3');
+    
+    if (!response.ok) {
+        throw new Error("Failed to fetch agents");
+    }
+    
+    const agents = await response.json();
+    return { agents };  // Wrap i object!
+}
+```
+
+**⚠️ VIGTIGT:** Return altid et object `{ agents }`, ikke bare array!
+
+---
+
+## TRIN 3: FORBIND LOADER TIL ROUTER
+**Fil:** `src/router.tsx`
+
+### 3a. Importer loader
+```ts
+import { AgentLoader } from "./loaders/AgentLoader";
+```
+
+### 3b. Tilføj til route
+```ts
+{
+    path: '/',
+    element: <Home />,
+    loader: AgentLoader  // ← Forbinder loader
+}
+```
+
+---
+
+## TRIN 4: HENT DATA I PAGE COMPONENT
+**Fil:** `src/pages/Home.tsx`  
+**Hvad gør den?** Modtager data og sender videre
 
 ```ts
 import { useLoaderData } from "react-router"
+import { type Agent } from "../Types"
+import AgentSection from "../components/sections/AgentSection"
+
+export default function Home() {
+    const { agents } = useLoaderData() as { agents: Agent[] };
+    
+    return (
+        <>
+            <AgentSection agents={agents} />
+        </>
+    )
+}
+```
+
+---
+
+## TRIN 5: VIS DATA I SECTION COMPONENT
+**Fil:** `src/components/sections/AgentSection.tsx`  
+**Hvad gør den?** Mapper gennem data og viser det
+
+```ts
 import { type Agent } from "../../Types"
 
-export default function XxxFetchShell() {
-    let agents = useLoaderData() as Agent[]
+export default function AgentSection({ agents }: { agents: Agent[] }) {
+    
+    // Fallback hvis ingen data
     if (!agents || agents.length === 0) {
         return <div>No agents found</div>
     }
+    
     return (
-        <div>
-            {agents.map(agent => (
-                <div key={agent.id}>
-                    <h3>{agent.name}</h3>
-                    <p>{agent.email}</p>
-                    <p>{agent.phone}</p>
-                </div>
-            ))}
-        </div>
+        <section>
+            <h2>Our Agents</h2>
+            <div className="grid grid-cols-3 gap-4">
+                {agents.map(agent => (
+                    <div key={agent.id}>
+                        <h3>{agent.name}</h3>
+                        <p>{agent.email}</p>
+                        <p>{agent.phone}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
     )
 }
-
-```
-3
-Opret en loaders mappe under src mappen.
-i den mappe, opret en XxxLoader.tsx. Denne fil skal indolde dit fetch.
-importer igen erklæning af datatyper til typescript.
-Til sidst opret fetchet.
-(?_limit=3 begræns til 3 visninger)
-
-```ts
-import { type Agent } from "../Types.ts"
-export async function fetchAgents(): Promise<Agent[]> {
-    let response = await fetch('https://dinmaegler.onrender.com/agents?\_limit=3')
-    let agents = await response.json()
-        return agents
-}
 ```
 
+**✅ DONE!**
 
-4
-Tilføj loaderen på det relavante sted i router tsx.
- 
- ```ts
-{
-  index: true,
-  element: <Home />,
-  loader: fetchAgents
-  },
-```
 
-4a
-derefter i routeren stadig, importer async functionen fra din XxxLoader.tsx fil.
-```ts
-import { fetchAgents } from "./Loaders/HomeLoader";
-```
-DONE!!
+
+
+
+
 ---------------------------------------
 # MULTIPLE FETCHES PÅ SAMME SIDE.
 man kan ikke tilføje flere loaders per link i router.tsx derfor,
