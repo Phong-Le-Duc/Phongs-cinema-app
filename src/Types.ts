@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+
+
+
 export type Movie = {
     id: number;
     title: string;
@@ -38,3 +42,13 @@ export interface BtnFlipProps {
     activeCategory: 'nowShowing' | 'upcoming';
     onCategoryChange: (category: 'nowShowing' | 'upcoming') => void;
 }
+
+
+
+
+export type SingleSeatProps = {
+    SeatNumber: number;
+    handleSelect: (seatNumber: number) => void;
+    children: ReactNode;
+    id?: string;
+};

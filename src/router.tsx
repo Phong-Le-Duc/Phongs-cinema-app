@@ -10,9 +10,10 @@ import NotFound from "./pages/NotFound";
 import { LoaderDetails } from "./loaders/LoaderDetails";
 import { LoaderHome } from "./loaders/LoaderHome";
 import { ExploreLoader } from "./loaders/LoaderMovie";
-import { LoaderCinemas } from "./loaders/LoaderCinemas";
+// import { LoaderCinemas } from "./loaders/LoaderCinemas";
 import SelectSeats from "./pages/SelectSeats";
-
+import { LoaderSelectSeats } from "./loaders/LoaderSelectSeats";
+import Checkout from "./pages/Checkout";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,12 @@ const router = createBrowserRouter([
             {
                 path: '/select-seats/:movieId',
                 element: <SelectSeats />,
-                loader: LoaderCinemas
+                loader: LoaderSelectSeats
+            },
+            {
+                path: '/checkout',
+                element: <Checkout />
+
             },
             {
                 path: '/profile',
