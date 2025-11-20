@@ -24,6 +24,8 @@ export default function Header() {
                 return { title: "Saved Plans" };
             case "/profile":
                 return { title: "Settings" };
+            case "/checkout":
+                return { title: "Checkout" };
             default:
                 return { title: "Page Not Found", icon: "/src/assets/default-icon.png" };
         }

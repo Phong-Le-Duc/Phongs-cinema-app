@@ -1,3 +1,5 @@
+
+
 import type { ReactNode } from "react";
 
 
@@ -51,4 +53,18 @@ export type SingleSeatProps = {
     handleSelect: (seatNumber: number) => void;
     children: ReactNode;
     id?: string;
+};
+
+
+export type PaymentFormProps = {
+    selectedSeats: number[];
+};
+
+export type PaymentFormState = {
+    email: string;
+    cardholder: string;
+    cardnumber: string;
+    expMonth: string;
+    expYear: string;
+    cvc: string;
 };
