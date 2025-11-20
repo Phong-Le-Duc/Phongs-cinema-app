@@ -164,9 +164,29 @@ export default function PaymentForm({ selectedSeats }: PaymentFormProps) {
             {success && (
 
 
-                <div className="mt-6 p-4 rounded-md bg-green-700 text-white text-center font-semibold">
-                    Your payment was successful
+
+
+                <div className="relative mt-6 p-4 rounded-md bg-secondary_1 text-white text-center font-semibold">
+                    <div className="mt-14">
+                        <p>Your payment was successful</p>
+                        <p>thank you for your purchase!</p>
+                        <p>Enjoy your movie at (cinema name)</p>
+                    </div>
+                    <button className="p-4 bg-black w-full rounded">SEE E-Ticket</button>
+                    <figure
+                        className="absolute"
+                        style={{
+                            top: '0%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            margin: 0,
+                            padding: 0,
+                        }}
+                    >
+                        <img src="../src/assets/Icon-Success.png" alt="payment success icon" className="w-20 h-20" />
+                    </figure>
                 </div>
+
             )}
         </>
     );
