@@ -1,11 +1,6 @@
-import { useSearchParams } from "react-router-dom";
 import PaymentForm from "../components/forms/PaymentForm";
 
 export default function Checkout() {
-    const [searchParams] = useSearchParams();
-    const seats = searchParams.get("seats"); // e.g. "5,6,7"
-    const selectedSeats = seats ? seats.split(",").map(Number) : [];
-
     return (
         <>
             <title>Phong's Biograf - Checkout</title>
@@ -17,7 +12,7 @@ export default function Checkout() {
                 <img src="../src/assets/Card-Payment-1.png" alt="" />
                 <img src="../src/assets/Card-Payment-1.png" alt="" />
             </figure>
-            <PaymentForm selectedSeats={selectedSeats} />
+            <PaymentForm />
         </>
     );
 }

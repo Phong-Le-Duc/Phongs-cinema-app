@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { z } from "zod";
 import type { PaymentFormState } from "../../Types";
-import type { PaymentFormProps } from "../../Types";
+import { useNavigate } from "react-router-dom";
+import { useBooking } from "../../context/BookingContext";
 
 const seatPrice = 12;
 
@@ -17,7 +18,7 @@ export const paymentSchema = z.object({
 
 
 
-export default function PaymentForm({ selectedSeats }: PaymentFormProps) {
+export default function PaymentForm() {
     const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, "0"));
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 12 }, (_, i) => (currentYear + i).toString());
@@ -32,7 +33,8 @@ export default function PaymentForm({ selectedSeats }: PaymentFormProps) {
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [success, setSuccess] = useState(false);
-
+    const navigate = useNavigate();
+    const { booking } = useBooking();
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -57,7 +59,8 @@ export default function PaymentForm({ selectedSeats }: PaymentFormProps) {
         }
     }
 
-    const totalCost = selectedSeats.length * seatPrice;
+    const seatCount = booking?.seats?.length ?? 0;
+    const totalCost = seatCount * seatPrice;
 
     return (
         <>
@@ -153,26 +156,31 @@ export default function PaymentForm({ selectedSeats }: PaymentFormProps) {
                     </label>
                 </div>
 
-                <button type="submit" className="bg-blue-500 text-white rounded-md p-2 mt-4 flex items-center justify-around w-full">
+                <button type="submit" className="bg-blue-500 text-white rounded-md p-2 mt-4 flex items-center justify-around w-full cursor-pointer">
                     <span>Pay Now</span>
                     <span className="mx-2">|</span>
                     <span className="text-gray-400 font-normal">
-                        {selectedSeats.length} seat(s) × ${seatPrice} = <span className="font-bold text-white">${totalCost}</span>
+                        {seatCount} × ${seatPrice} = <span className="font-bold text-white">${totalCost}</span>
                     </span>
                 </button>
             </form>
+
+
             {success && (
-
-
-
-
-                <div className="relative mt-6 p-4 rounded-md bg-secondary_1 text-white text-center font-semibold">
+                <div
+                    className="relative mt-3 p-4 rounded-md bg-secondary_1 text-white text-center font-semibold animate-slideup-bounce"
+                >
                     <div className="mt-14">
                         <p>Your payment was successful</p>
                         <p>thank you for your purchase!</p>
                         <p>Enjoy your movie at (cinema name)</p>
                     </div>
-                    <button className="p-4 bg-black w-full rounded">SEE E-Ticket</button>
+                    <button
+                        className="p-4 bg-black w-full rounded cursor-pointer"
+                        onClick={() => navigate("/eticket")}
+                    >
+                        SEE E-Ticket
+                    </button>
                     <figure
                         className="absolute"
                         style={{
@@ -186,8 +194,8 @@ export default function PaymentForm({ selectedSeats }: PaymentFormProps) {
                         <img src="../src/assets/Icon-Success.png" alt="payment success icon" className="w-20 h-20" />
                     </figure>
                 </div>
-
             )}
+
         </>
     );
 }

@@ -37,7 +37,7 @@ Formålet med opgaven er at:
 - **Log ind**: En login-side hvor brugeren kan logge ind med e-mail og adgangskode.
 - **Session-håndtering**: Når brugeren er logget ind, skal appen kunne huske brugeren.
 - **Log ud**: Mulighed for at logge ud igen.
-- **Gemte planer og billetter**: Disse skal kun være tilgængelige for den bruger, der er logget ind.
+- ** **: Disse skal kun være tilgængelige for den bruger, der er logget ind.
 
 ---
 

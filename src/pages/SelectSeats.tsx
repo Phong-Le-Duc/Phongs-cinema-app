@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import type { Cinema } from "../Types";
+import { useBooking } from "../context/BookingContext";
 
 
 
@@ -13,6 +14,8 @@ export default function Seats() {
     const navigate = useNavigate();
     const { id: movieId } = useParams<{ id: string }>();
     const { cinemas, movie } = useLoaderData() as { cinemas: Cinema[]; movie: any };
+
+    const { setBooking } = useBooking();
 
     const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
     const [showError, setShowError] = useState<boolean>(false);
@@ -53,8 +56,20 @@ export default function Seats() {
             return;
         }
 
-        // Go to checkout page with all the info
-        navigate(`/checkout?seats=${selectedSeats.join(",")}&cinema=${cinema}&date=${date}&time=${time}&movieId=${movieId}`);
+        // Set booking context
+        setBooking({
+            film: movie.title,
+            date,
+            seats: selectedSeats,
+            location: cinema,
+            payment: selectedSeats.length * 12, // or use your seatPrice variable
+            order: Math.floor(1000000 + Math.random() * 9000000).toString(), // random 7-digit number
+            time,
+            movieId: movieId ?? "",
+        });
+
+        // Go to checkout page
+        navigate("/checkout");
     }
 
     return (
@@ -205,11 +220,11 @@ export default function Seats() {
 
             <div className="mt-6">
                 {selectedSeats.length > 0 ? (
-                    <button onClick={goToCheckout} className="bg-blue-500 text-white px-4 py-3 rounded-lg w-full">
+                    <button onClick={goToCheckout} className="bg-blue-500 text-white px-4 py-3 rounded-lg w-full cursor-pointer">
                         Checkout ({selectedSeats.length} seats)
                     </button>
                 ) : (
-                    <button onClick={goToCheckout} className="bg-gray-400 text-gray-600 px-4 py-3 rounded-lg w-full">
+                    <button onClick={goToCheckout} className="bg-gray-400 text-gray-600 px-4 py-3 rounded-lg w-full cursor-pointer">
                         Pick Seats First
                     </button>
                 )}

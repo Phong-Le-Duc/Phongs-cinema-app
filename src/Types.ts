@@ -58,6 +58,11 @@ export type SingleSeatProps = {
 
 export type PaymentFormProps = {
     selectedSeats: number[];
+    cinema: string;
+    date: string;
+    time: string;
+    movieId: string;
+    title: string;
 };
 
 export type PaymentFormState = {

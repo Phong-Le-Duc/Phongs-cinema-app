@@ -107,8 +107,31 @@ h1 {
 }
 
 
+/* success payment animation */
+@keyframes slideup-bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
 
+  60% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
 
+  80% {
+    transform: translateY(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideup-bounce {
+  animation: slideup-bounce 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
 
 
 

@@ -14,6 +14,7 @@ import { ExploreLoader } from "./loaders/LoaderMovie";
 import SelectSeats from "./pages/SelectSeats";
 import { LoaderSelectSeats } from "./loaders/LoaderSelectSeats";
 import Checkout from "./pages/Checkout";
+import Eticket from "./pages/Eticket";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
                 path: '/checkout',
                 element: <Checkout />
 
+            },
+            {
+                path: '/eticket',
+                element: <Eticket />
             },
             {
                 path: '/profile',

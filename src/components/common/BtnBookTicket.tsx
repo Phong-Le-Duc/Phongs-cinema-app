@@ -10,7 +10,7 @@ export default function BtnBookTicket({ movieId }: { movieId: number }) {
 
     return (
         <button
-            className="bg-blue-500 text-white px-4 py-2 rounded font-bold"
+            className="bg-blue-500 text-white px-4 py-2 rounded font-bold cursor-pointer"
             onClick={handleClick}
         >
             Book Ticket

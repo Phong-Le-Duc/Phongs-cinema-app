@@ -11,7 +11,7 @@ export default function Header() {
             return { title: "Movie detail", icon: "/src/assets/saved_plans.png" };
         }
         if (location.pathname.startsWith("/select-seats/")) {
-            return { title: "Select Seats", icon: "/src/assets/ticket.png" }; // Use your ticket icon
+            return { title: "Select Seats" }; // Use your ticket icon
         }
 
 
@@ -26,6 +26,8 @@ export default function Header() {
                 return { title: "Settings" };
             case "/checkout":
                 return { title: "Checkout" };
+            case "/eticket":
+                return { title: "E-Ticket" }; // Add this line
             default:
                 return { title: "Page Not Found", icon: "/src/assets/default-icon.png" };
         }
@@ -37,7 +39,7 @@ export default function Header() {
 
     return (
         <header className="flex items-center justify-between mb-6">
-            <button onClick={() => navigate(-1)} className="flex items-center">
+            <button onClick={() => navigate(-1)} className="flex items-center cursor-pointer">
                 <img src="/src/assets/btn-back.png" alt="Go back" className="w-6 h-6 object-contain" />
             </button>
             <h1>{title}</h1>
