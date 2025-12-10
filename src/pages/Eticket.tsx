@@ -29,7 +29,7 @@ export default function Eticket() {
     return (
         <>
             <h1>instruction</h1>
-            <p className="text-gray-400">Come to the cinema, show and scan the barcode to the space provided. Continue to comply with health protocols.</p>
+            <p className="text-gray-400 ">Come to the cinema, show and scan the barcode to the space provided. Continue to comply with health protocols.</p>
 
             <section className="bg-white p-8 rounded-lg mt-4 text-black flex flex-col gap-4 relative">
 
@@ -99,15 +99,16 @@ export default function Eticket() {
 
             {showSuccess && (
                 <div
-                    className="relative mt-3 p-4 rounded-md bg-secondary_1 text-white text-center font-semibold animate-slideup-bounce"
+                    className="fixed bottom-18 left-1/2 transform -translate-x-1/2 p-4 rounded-md bg-secondary_1 text-white text-center font-semibold animate-slideup-bounce z-50 shadow-lg"
+                    style={{ minWidth: 300, maxWidth: 400 }}
                 >
-                    <div className="mt-14">
+                    <div className="mt-10">
                         <p>Your e-ticket PDF was downloaded!</p>
                         <p>Thank you for your purchase!</p>
                         <p>Enjoy your movie at {booking?.location}</p>
                     </div>
                     <button
-                        className="p-4 bg-black w-full rounded cursor-pointer"
+                        className="p-4 bg-black w-full rounded cursor-pointer mt-4"
                         onClick={() => {
                             setShowSuccess(false);
                             navigate("/");
@@ -118,9 +119,9 @@ export default function Eticket() {
                     <figure
                         className="absolute"
                         style={{
-                            top: '0%',
+                            top: '-40px',
                             left: '50%',
-                            transform: 'translate(-50%, -50%)',
+                            transform: 'translate(-50%, 0)',
                             margin: 0,
                             padding: 0,
                         }}

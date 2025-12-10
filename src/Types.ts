@@ -20,7 +20,7 @@ export type Movie = {
 
 export type MovieCardProps = {
     movie: Movie;
-    variant?: "poster" | "backdrop" | "poster-small";  // Added poster-small
+    variant?: "poster-large" | "poster" | "poster-small" | "backdrop";
     showRating?: boolean;
 }
 

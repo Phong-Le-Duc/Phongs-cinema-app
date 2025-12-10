@@ -170,7 +170,7 @@ export default function PaymentForm() {
                 <div
                     className="relative mt-3 p-4 rounded-md bg-secondary_1 text-white text-center font-semibold animate-slideup-bounce"
                 >
-                    <div className="mt-14">
+                    <div className="mt-14 mb-4">
                         <p>Your payment was successful</p>
                         <p>thank you for your purchase!</p>
                         <p>Enjoy your movie at (cinema name)</p>

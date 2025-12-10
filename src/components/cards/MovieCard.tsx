@@ -9,14 +9,21 @@ import { type MovieCardProps } from "../../Types" //typescript import
 export default function MovieCard({ movie, variant = "backdrop", showRating = false }: MovieCardProps) {
 
     // Choose image based on variant
-    const imagePath = variant === "poster" || variant === "poster-small"
+    const imagePath = variant === "poster" || variant === "poster-small" || variant === "poster-large"
         ? movie.poster_path
         : movie.backdrop_path;
     const imageUrl = `https://image.tmdb.org/t/p/w500${imagePath}`;
 
     // Choose width based on variant
     // 🟩 JavaScript: Ternary operator for different sizes
-    const width = variant === "poster" ? "w-40" : variant === "poster-small" ? "w-32" : "w-64";
+    const width =
+        variant === "poster-large"
+            ? "w-56"
+            : variant === "poster"
+                ? "w-40"
+                : variant === "poster-small"
+                    ? "w-32"
+                    : "w-64";
 
 
 

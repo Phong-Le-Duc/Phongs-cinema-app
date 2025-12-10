@@ -15,6 +15,8 @@ import SelectSeats from "./pages/SelectSeats";
 import { LoaderSelectSeats } from "./loaders/LoaderSelectSeats";
 import Checkout from "./pages/Checkout";
 import Eticket from "./pages/Eticket";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <Profile />
+            },
+            {
+                path: 'login',
+                element: <Login />
+            },
+            {
+                path: 'register',
+                element: <Register />
             },
             {
                 path: '*',
