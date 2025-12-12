@@ -65,7 +65,7 @@ export default function FormLogin() {
 
     return (
         <>
-            <div className="p-10 rounded-[3px] shadow-md max-w-md mx-auto my-15">
+            <div className="py-5 px-10 rounded-[3px] max-w-md mx-auto my-10">
                 <div>
                     <form onSubmit={handleLogin} className="login-form flex flex-col gap-4">
                         <label htmlFor="email" className="text-white">Email:</label>
@@ -98,7 +98,7 @@ export default function FormLogin() {
 
                     <div className="">
                         <p className="mt-5 mb-1 text-white">
-                            Har du ikke en konto? <span className="text-blue-500"><Link to="/register">Opret bruger.</Link></span>
+                            don't have an account? <span className="text-blue-500"><Link to="/register">Register here.</Link></span>
                         </p>
                     </div>
                 </div>

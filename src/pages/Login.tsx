@@ -5,7 +5,7 @@ export default function Login() {
 
     return (
         <>
-            {/* <Headline headlineText="Login" /> */}
+            <h2 className="text-white font-bold text-center mt-20 w-80 mx-auto">Please login to create a profile and bookmark movies</h2>
             <FormLogin />
         </>
     )

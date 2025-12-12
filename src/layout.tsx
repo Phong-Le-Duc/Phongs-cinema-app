@@ -15,7 +15,7 @@ export default function Layout() {
     const { user } = useAuth();
 
     return (
-        <div className="m-page_margin">
+        <div className="m-page_margin max-w-md ">
             {/* <ScrollRestoration /> */}
 
             {/* Show special header on home, normal header elsewhere */}

@@ -1,85 +1,86 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { useState, useEffect } from "react";
+import { useMovie } from "../../../context/MovieContext";
 
 export default function Header() {
     const location = useLocation();
     const navigate = useNavigate();
     const { user } = useAuth();
-    const params = useParams();
+    const { movie } = useMovie();
 
-    // Example: get movieId from URL params
-    const movieId = params.id; // if your route is /movie/:id
-
-    // You may need to get movieTitle from context or loader if available
-    const movieTitle = ""; // Set this to the correct value if possible
-
-    // Track saved state for the bookmark icon
     const [isSaved, setIsSaved] = useState(false);
 
-    // Map routes to their display text and icons
-    function getPageInfo() {
-        if (location.pathname.startsWith("/movie/")) {
-            return { title: "Movie detail" };
+    useEffect(() => {
+        if (movie.id) {
+            const savedMovies = JSON.parse(localStorage.getItem("bookmarkedMovies") || "[]");
+            setIsSaved(savedMovies.some((m: any) => m.id === movie.id));
         }
-        if (location.pathname.startsWith("/select-seats/")) {
-            return { title: "Select Seats" };
-        }
-        switch (location.pathname) {
-            case "/":
-                return { title: "Home", icon: "/src/assets/home-icon.png" };
-            case "/explore":
-                return { title: "Explore", icon: "/src/assets/explore.png" };
-            case "/saved-plans":
-                return { title: "Saved Plans" };
-            case "/profile":
-                return { title: "Settings" };
-            case "/checkout":
-                return { title: "Checkout" };
-            case "/eticket":
-                return { title: "E-Ticket" };
-            case "/login":
-                return { title: "Login" };
-            case "/register":
-                return { title: "Register" };
-            default:
-                return { title: "Page Not Found", icon: "/src/assets/default-icon.png" };
-        }
-    }
+    }, [movie.id]);
 
-    const { title } = getPageInfo();
+    // Use the same key as in SavedPlans
+    const key = user ? `bookmarkedMovies_${user.email}` : "bookmarkedMovies_guest";
 
-    // Handler for icon click
     function handleIconClick() {
         if (!user) {
             navigate("/login");
-        } else if (movieId) {
-            const savedMovies = JSON.parse(localStorage.getItem("bookmarkedMovies") || "[]");
+        } else if (movie.id && movie.title) {
+            const savedMovies = JSON.parse(localStorage.getItem(key) || "[]");
             if (!isSaved) {
-                const movieData = { id: movieId, title: movieTitle };
-                localStorage.setItem("bookmarkedMovies", JSON.stringify([...savedMovies, movieData]));
+                const movieData = { id: movie.id, title: movie.title, poster_path: movie.poster_path };
+                localStorage.setItem(key, JSON.stringify([...savedMovies, movieData]));
                 setIsSaved(true);
             } else {
-                const updated = savedMovies.filter((m: any) => m.id !== movieId);
-                localStorage.setItem("bookmarkedMovies", JSON.stringify(updated));
+                const updated = savedMovies.filter((m: any) => m.id !== movie.id);
+                localStorage.setItem(key, JSON.stringify(updated));
                 setIsSaved(false);
             }
         }
     }
 
-    // Choose icon based on saved state
     const bookmarkIcon = isSaved
         ? "/src/assets/btn-Bookmark-saved.png"
         : "/src/assets/btn-Bookmark-unsaved.png";
+
+    function getPageTitle() {
+        if (location.pathname.startsWith("/movie/")) {
+            return "Movie detail";
+        }
+
+        if (location.pathname.startsWith("/select-seats")) {
+            return "Book Tickets";
+        }
+
+        switch (location.pathname) {
+            case "/":
+                return "Home";
+            case "/explore":
+                return "Explore";
+            case "/saved-plans":
+                return "Bookmarked Movies";
+            case "/profile":
+                return "Profile";
+            case "/login":
+                return "Login";
+            case "/register":
+                return "Register account";
+            case "/checkout":
+                return "Payment And Checkout";
+
+            // Add more cases as needed
+            default:
+                return "Page Not Found";
+        }
+    }
 
     return (
         <header className="flex items-center justify-between mb-6">
             <button onClick={() => navigate(-1)} className="flex items-center cursor-pointer">
                 <img src="/src/assets/btn-back.png" alt="Go back" className="w-6 h-6 object-contain" />
             </button>
-            <h1>{title}</h1>
+            <h1>{getPageTitle()}</h1>
             <div className="w-6 h-6 flex items-center justify-center">
-                {location.pathname.startsWith("/movie/") && (
+                {location.pathname.startsWith("/movie/") && movie.id && (
                     <img
                         src={bookmarkIcon}
                         alt={isSaved ? "Saved" : "Unsaved"}
