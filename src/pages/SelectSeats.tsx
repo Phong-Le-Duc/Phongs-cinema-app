@@ -106,7 +106,7 @@ export default function Seats() {
                             onChange={d => setDate(d ? d.toISOString().slice(0, 10) : "")}
                             dateFormat="yyyy-MM-dd"
                             placeholderText="Choose date"
-                            className={`border-2 rounded-lg h-10 p-2 text-gray-400 w-full ${errors.date ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`border-2 rounded-lg h-10 p-2 text-gray-400 placeholder:text-sm w-full ${errors.date ? 'border-red-500' : 'border-gray-300'}`}
                         // style={{ backgroundColor: 'var(--color-primary_1)' }}
                         />
                         <FaRegCalendarAlt className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
@@ -126,7 +126,7 @@ export default function Seats() {
                             timeCaption="Time"
                             dateFormat="HH:mm"
                             placeholderText="Choose time"
-                            className={`border-2 rounded-lg h-10 p-2 text-gray-400 w-full ${errors.time ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`border-2 rounded-lg h-10 p-2 text-gray-400 placeholder:text-sm w-full ${errors.time ? 'border-red-500' : 'border-gray-300'}`}
                         />
                         <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
                             {/* Clock icon */}
