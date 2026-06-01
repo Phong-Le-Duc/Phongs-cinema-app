@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import type { Cinema } from "../Types";
 import { useBooking } from "../context/BookingContext";
+import screenImage from "../assets/screen.png";
 
 
 
@@ -104,7 +105,7 @@ export default function Seats() {
                             selected={date ? new Date(date) : null}
                             onChange={d => setDate(d ? d.toISOString().slice(0, 10) : "")}
                             dateFormat="yyyy-MM-dd"
-                            placeholderText="Choose a date"
+                            placeholderText="Choose date"
                             className={`border-2 rounded-lg h-10 p-2 text-gray-400 w-full ${errors.date ? 'border-red-500' : 'border-gray-300'}`}
                         // style={{ backgroundColor: 'var(--color-primary_1)' }}
                         />
@@ -124,7 +125,7 @@ export default function Seats() {
                             timeIntervals={15}
                             timeCaption="Time"
                             dateFormat="HH:mm"
-                            placeholderText="Choose a time"
+                            placeholderText="Choose time"
                             className={`border-2 rounded-lg h-10 p-2 text-gray-400 w-full ${errors.time ? 'border-red-500' : 'border-gray-300'}`}
                         />
                         <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
@@ -136,7 +137,7 @@ export default function Seats() {
                 </div>
             </div>
 
-            <img src="../src/assets/screen.png" className="flex mx-auto mt-10" alt="cinema screen image" />
+            <img src={screenImage} className="flex mx-auto mt-10" alt="cinema screen image" />
 
             {/* 6×8 Cinema seat grid */}
             <div className="Seat-grid-layout">
