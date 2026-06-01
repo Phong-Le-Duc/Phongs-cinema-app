@@ -2,6 +2,8 @@ import { useBooking } from "../context/BookingContext";
 import jsPDF from "jspdf";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import barcodeImage from "../assets/Barcode.png";
+import successIcon from "../assets/Icon-Success.png";
 
 
 
@@ -86,7 +88,7 @@ export default function Eticket() {
                 </div>
 
                 <figure className="mx-auto mt-4">
-                    <img src="../src/assets/Barcode.png" alt="" />
+                    <img src={barcodeImage} alt="Ticket barcode" />
                 </figure>
                 <button
                     className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
@@ -126,7 +128,7 @@ export default function Eticket() {
                             padding: 0,
                         }}
                     >
-                        <img src="../src/assets/Icon-Success.png" alt="success icon" className="w-20 h-20" />
+                        <img src={successIcon} alt="success icon" className="w-20 h-20" />
                     </figure>
                 </div>
             )}
