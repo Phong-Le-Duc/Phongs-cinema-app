@@ -66,6 +66,8 @@ export default function Header() {
                 return "Register account";
             case "/checkout":
                 return "Payment And Checkout";
+            case "/eticket":
+                return "Your E-ticket";
 
             // Add more cases as needed
             default:
