@@ -20,7 +20,6 @@ export default function Profile() {
     const [deleteError, setDeleteError] = useState("");
     const [deleteSuccess, setDeleteSuccess] = useState("");
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-    const [open, setOpen] = useState(false);
     const [personalDropdownOpen, setPersonalDropdownOpen] = useState(false);
     const [emailDropdownOpen, setEmailDropdownOpen] = useState(false);
     const [notificationDropdownOpen, setNotificationDropdownOpen] = useState(false);
@@ -187,17 +186,6 @@ export default function Profile() {
                 <p className="text-white font-bold cursor-pointer">Logout</p>
             </button>
 
-            <div>
-
-                {open && (
-                    <div className="bg-white text-black p-4 rounded shadow mt-2">
-                        {/* Dropdown content here */}
-                        <p>Personal Data Option 1</p>
-                        <p>Personal Data Option 2</p>
-                    </div>
-                )}
-                {/* The rest of your content will be pushed down */}
-            </div>
         </div>
     );
 }
