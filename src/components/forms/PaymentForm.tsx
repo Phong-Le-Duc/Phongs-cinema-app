@@ -3,6 +3,7 @@ import { z } from "zod";
 import type { PaymentFormState } from "../../Types";
 import { useNavigate } from "react-router-dom";
 import { useBooking } from "../../context/BookingContext";
+import successIcon from "../../assets/Icon-Success.png";
 
 const seatPrice = 12;
 
@@ -191,7 +192,7 @@ export default function PaymentForm() {
                             padding: 0,
                         }}
                     >
-                        <img src="../src/assets/Icon-Success.png" alt="payment success icon" className="w-20 h-20" />
+                        <img src={successIcon} alt="payment success icon" className="w-20 h-20" />
                     </figure>
                 </div>
             )}
