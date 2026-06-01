@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import type { Movie } from "../../Types";
+import searchIcon from "../../assets/search-icon.png";
 
 export default function SearchInput() {
     const { movies } = useLoaderData() as { movies: Movie[] };
@@ -49,8 +50,9 @@ export default function SearchInput() {
         <div className="relative w-full">
             <form onSubmit={handleSubmit}>
                 <img
-                    src="/src/assets/search-icon.png"
-                    alt="Search"
+                    src={searchIcon}
+                    alt=""
+                    aria-hidden="true"
                     className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5"
                 />
                 <input
