@@ -22,7 +22,7 @@ export default function SavedPlans() {
     return (
         <div className="p-8 bg-gray-950 rounded h-120">
             {bookmarkedMovies.length === 0 ? (
-                <p>No movies bookmarked yet.</p>
+                <p className="text-white font-bold">No movies bookmarked yet.</p>
             ) : (
                 <ul className="overflow-y-auto h-full pr-2">
                     {bookmarkedMovies.map((movie) => (
