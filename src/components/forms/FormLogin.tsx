@@ -15,6 +15,7 @@ export default function FormLogin() {
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
+    const apiBaseUrl = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
 
 
 
@@ -35,11 +36,16 @@ export default function FormLogin() {
         } else {
             setErrors({});
 
+            if (!apiBaseUrl) {
+                setErrors({ general: { errors: ["Backend URL mangler. Sæt VITE_API_URL i miljøvariabler."] } });
+                return;
+            }
+
 
 
 
             // Use correct backend endpoint and field names
-            const response = await fetch("http://localhost:4000/login", {
+            const response = await fetch(`${apiBaseUrl}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -87,6 +93,7 @@ export default function FormLogin() {
                             className="border border-gray-300 p-1 rounded-[3px] bg-primary_2 text-white"
                         />
                         <p>{errors && errors?.password?.errors[0]}</p>
+                        <p>{errors && errors?.general?.errors[0]}</p>
 
                         <button
                             type="submit"

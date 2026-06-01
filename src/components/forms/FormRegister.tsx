@@ -16,6 +16,7 @@ export default function FormRegister() {
     const [errors, setErrors] = useState<FormErrors>({});
 
     const navigate = useNavigate();
+    const apiBaseUrl = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
 
     // Helper to display all errors for a field
     function renderErrors(field: string) {
@@ -40,9 +41,14 @@ export default function FormRegister() {
             setErrors({});
             // Handle successful registration
 
+            if (!apiBaseUrl) {
+                setErrors({ general: { errors: ["Backend URL mangler. Sæt VITE_API_URL i miljøvariabler."] } });
+                return;
+            }
+
             const { confirmPassword, ...userData } = result.data;
 
-            const response = await fetch("http://localhost:4000/register", {
+            const response = await fetch(`${apiBaseUrl}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
