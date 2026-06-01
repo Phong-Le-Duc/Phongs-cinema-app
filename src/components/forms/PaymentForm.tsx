@@ -192,7 +192,7 @@ export default function PaymentForm() {
                             padding: 0,
                         }}
                     >
-                        <img src={successIcon} alt="payment success icon" className="w-20 h-20" />
+                        <img src={successIcon} alt="payment success icon" className="w-10 h-10" />
                     </figure>
                 </div>
             )}
