@@ -2,6 +2,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { useState, useEffect } from "react";
 import { useMovie } from "../../../context/MovieContext";
+import btnBookmarkSaved from "../../../assets/btn-Bookmark-saved.png";
+import btnBookmarkUnsaved from "../../../assets/btn-Bookmark-unsaved.png";
+import btnBack from "../../../assets/btn-back.png";
 
 export default function Header() {
     const location = useLocation();
@@ -38,9 +41,7 @@ export default function Header() {
         }
     }
 
-    const bookmarkIcon = isSaved
-        ? "/src/assets/btn-Bookmark-saved.png"
-        : "/src/assets/btn-Bookmark-unsaved.png";
+    const bookmarkIcon = isSaved ? btnBookmarkSaved : btnBookmarkUnsaved;
 
     function getPageTitle() {
         if (location.pathname.startsWith("/movie/")) {
@@ -78,7 +79,7 @@ export default function Header() {
     return (
         <header className="flex items-center justify-between mb-6">
             <button onClick={() => navigate(-1)} className="flex items-center cursor-pointer">
-                <img src="/src/assets/btn-back.png" alt="Go back" className="w-6 h-6 object-contain" />
+                <img src={btnBack} alt="Go back" className="w-6 h-6 object-contain" />
             </button>
             <h1>{getPageTitle()}</h1>
             <div className="w-6 h-6 flex items-center justify-center">
