@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext"; // adjust path as needed
+
 
 export default function SavedPlans() {
     const { user } = useAuth(); // get the current user
@@ -20,7 +22,7 @@ export default function SavedPlans() {
     }
 
     return (
-        <div className="p-8 bg-gray-950 rounded h-120">
+        <div className="py-8 px-2 bg-gray-950 rounded h-120">
             {bookmarkedMovies.length === 0 ? (
                 <p className="text-white font-bold">No movies bookmarked yet.</p>
             ) : (
@@ -39,7 +41,7 @@ export default function SavedPlans() {
                                 className="ml-2 px-2 py-1 bg-blue-400 text-white rounded"
                                 onClick={() => handleRemove(movie.id)}
                             >
-                                Remove
+                                <FaRegTrashAlt />
                             </button>
                         </li>
                     ))}
