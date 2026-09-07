@@ -18,26 +18,26 @@ export default function FooterNav() {
     }
 
     return (
-        <nav className="pt-8">
-            <ul className="flex justify-between">
+        <nav className="py-2">
+            <ul className="flex justify-between items-center">
                 <li>
                     <Link to="/">
-                        <img src={homeIcon} alt="Home" />
+                        <img src={homeIcon} alt="Home" className="w-6 h-6 object-contain" />
                     </Link>
                 </li>
                 <li>
                     <Link to="/explore">
-                        <img src={exploreIcon} alt="Explore" />
+                        <img src={exploreIcon} alt="Explore" className="w-6 h-6 object-contain" />
                     </Link>
                 </li>
                 <li>
                     <Link to="/saved-plans" onClick={handleSavedPlansClick}>
-                        <img src={savedPlansIcon} alt="Saved Plans" />
+                        <img src={savedPlansIcon} alt="Saved Plans" className="w-6 h-6 object-contain" />
                     </Link>
                 </li>
                 <li>
                     <Link to="/profile">
-                        <img src={profileIcon} alt="Profile" />
+                        <img src={profileIcon} alt="Profile" className="w-6 h-6 object-contain" />
                     </Link>
                 </li>
             </ul>

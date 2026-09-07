@@ -15,7 +15,7 @@ export default function Layout() {
     const { user } = useAuth();
 
     return (
-        <div className="w-full max-w-md mx-auto px-page_margin">
+        <div className="w-full max-w-md mx-auto px-page_margin py-page_margin pb-20">
             {/* <ScrollRestoration /> */}
 
             {/* Show special header on home, normal header elsewhere */}
