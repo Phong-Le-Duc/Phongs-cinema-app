@@ -52,23 +52,25 @@ export default function Profile() {
     }
 
     return (
-        <div className="h-auto bg-gray-950 rounded p-8 flex flex-col gap-4">
+        <div className="h-auto bg-gray-950 rounded p-6 flex flex-col gap-4">
+
+            {/* helper: unified button/card style */}
             {/* Personal Data Dropdown */}
             <div className="relative">
                 <button
-                    className="flex gap-4 items-center w-full text-left"
+                    className="flex items-center gap-4 w-full text-left p-3 rounded hover:bg-gray-800"
                     onClick={() => setPersonalDropdownOpen((open) => !open)}
                 >
-                    <figure className="p-4 bg-blue-700 rounded">
-                        <img className="cursor-pointer" src="src/assets/Activity.png" alt="Personal Data" />
+                    <figure className="p-2 bg-blue-700 rounded flex-shrink-0">
+                        <img className="w-6 h-6" src="src/assets/Activity.png" alt="Personal Data" />
                     </figure>
-                    <span className="text-white font-bold cursor-pointer">Personal Data</span>
-                    <svg className="w-4 h-4 ml-auto text-white font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="text-white font-semibold">Personal Data</span>
+                    <svg className="w-4 h-4 ml-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 {personalDropdownOpen && (
-                    <div className="mt-2 w-full bg-white rounded shadow-lg">
+                    <div className="mt-2 w-full bg-white rounded shadow-lg overflow-hidden">
                         <button className="flex items-center gap-2 w-full px-4 py-2 text-gray-700 hover:bg-gray-100">
                             <span>Placeholder Option 1</span>
                         </button>
@@ -82,19 +84,19 @@ export default function Profile() {
             {/* Email & Payment Dropdown */}
             <div className="relative">
                 <button
-                    className="flex gap-4 items-center w-full text-left"
+                    className="flex items-center gap-4 w-full text-left p-3 rounded hover:bg-gray-800"
                     onClick={() => setEmailDropdownOpen((open) => !open)}
                 >
-                    <figure className="p-4 bg-blue-400 rounded">
-                        <img className="cursor-pointer" src="src/assets/user.png" alt="Email and payment" />
+                    <figure className="p-2 bg-blue-400 rounded flex-shrink-0">
+                        <img className="w-6 h-6" src="src/assets/user.png" alt="Email and payment" />
                     </figure>
-                    <span className="text-white font-bold cursor-pointer">Email & Payment</span>
-                    <svg className="w-4 h-4 ml-auto text-white font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="text-white font-semibold">Email & Payment</span>
+                    <svg className="w-4 h-4 ml-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 {emailDropdownOpen && (
-                    <div className="mt-2 w-full bg-white rounded shadow-lg">
+                    <div className="mt-2 w-full bg-white rounded shadow-lg overflow-hidden">
                         <button className="flex items-center gap-2 w-full px-4 py-2 text-gray-700 hover:bg-gray-100">
                             <span>Placeholder Option 1</span>
                         </button>
@@ -107,12 +109,12 @@ export default function Profile() {
 
             {/* Delete Account button FIRST */}
             <div className="flex flex-col gap-2 mt-4">
-                <button className="flex gap-4 items-center" onClick={() => setShowDeleteConfirm(true)} disabled={showDeleteConfirm}>
-                    <figure className="p-4 bg-red-700 rounded"><img className="cursor-pointer" src="src/assets/Logout.png" alt="Delete Account" /></figure>
-                    <p className="text-white font-bold cursor-pointer">Deactivate Account</p>
+                <button className="flex items-center gap-4 w-full p-3 rounded hover:bg-gray-800" onClick={() => setShowDeleteConfirm(true)} disabled={showDeleteConfirm}>
+                    <figure className="p-2 bg-red-700 rounded flex-shrink-0"><img className="w-6 h-6" src="src/assets/Logout.png" alt="Delete Account" /></figure>
+                    <p className="text-white font-semibold">Deactivate Account</p>
                 </button>
                 {showDeleteConfirm && (
-                    <div className="flex flex-col gap-2 mt-2">
+                    <div className="flex flex-col gap-2 mt-2 bg-gray-900 p-3 rounded">
                         <p className="text-white">Are you sure you want to delete your account?</p>
                         <div className="flex gap-2 mt-2">
                             <button className="flex gap-4 items-center bg-red-700 p-2 rounded" onClick={handleDeleteAccount}>
@@ -131,19 +133,19 @@ export default function Profile() {
             {/* Notification Dropdown */}
             <div className="relative">
                 <button
-                    className="flex gap-4 items-center w-full text-left"
+                    className="flex items-center gap-4 w-full text-left p-3 rounded hover:bg-gray-800"
                     onClick={() => setNotificationDropdownOpen((open) => !open)}
                 >
-                    <figure className="p-4 bg-blue-400 rounded">
-                        <img className="cursor-pointer" src="src/assets/user.png" alt="Notification" />
+                    <figure className="p-2 bg-blue-400 rounded flex-shrink-0">
+                        <img className="w-6 h-6" src="src/assets/user.png" alt="Notification" />
                     </figure>
-                    <span className="text-white font-bold cursor-pointer">Notification</span>
-                    <svg className="w-4 h-4 ml-auto text-white font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="text-white font-semibold">Notification</span>
+                    <svg className="w-4 h-4 ml-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 {notificationDropdownOpen && (
-                    <div className="mt-2 w-full bg-white rounded shadow-lg">
+                    <div className="mt-2 w-full bg-white rounded shadow-lg overflow-hidden">
                         <button className="flex items-center gap-2 w-full px-4 py-2 text-gray-700 hover:bg-gray-100">
                             <span>Enable Notifications placeholder</span>
                         </button>
@@ -158,19 +160,19 @@ export default function Profile() {
             {/* Tickets Dropdown */}
             <div className="relative">
                 <button
-                    className="flex gap-4 items-center w-full text-left"
+                    className="flex items-center gap-4 w-full text-left p-3 rounded hover:bg-gray-800"
                     onClick={() => setTicketsDropdownOpen((open) => !open)}
                 >
-                    <figure className="p-4 bg-blue-400 rounded">
-                        <img className="cursor-pointer" src="src/assets/user.png" alt="Tickets" />
+                    <figure className="p-2 bg-blue-400 rounded flex-shrink-0">
+                        <img className="w-6 h-6" src="src/assets/user.png" alt="Tickets" />
                     </figure>
-                    <span className="text-white font-bold cursor-pointer">Tickets</span>
-                    <svg className="w-4 h-4 ml-auto text-white font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="text-white font-semibold">Tickets</span>
+                    <svg className="w-4 h-4 ml-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 {ticketsDropdownOpen && (
-                    <div className="mt-2 w-full bg-white rounded shadow-lg">
+                    <div className="mt-2 w-full bg-white rounded shadow-lg overflow-hidden">
                         <button className="flex items-center gap-2 w-full px-4 py-2 text-gray-700 hover:bg-gray-100">
                             <span>Tickets placeholder</span>
                         </button>
@@ -181,9 +183,9 @@ export default function Profile() {
 
 
             {/* Logout button SECOND */}
-            <button className="flex gap-4 items-center " onClick={handleLogout}>
-                <figure className="p-4 bg-red-700 rounded"><img className="cursor-pointer" src="src/assets/Logout.png" alt="Logout" /></figure>
-                <p className="text-white font-bold cursor-pointer">Logout</p>
+            <button className="flex gap-4 items-center w-full p-3 rounded hover:bg-gray-800" onClick={handleLogout}>
+                <figure className="p-2 bg-red-700 rounded flex-shrink-0"><img className="w-6 h-6" src="src/assets/Logout.png" alt="Logout" /></figure>
+                <p className="text-white font-semibold">Logout</p>
             </button>
 
         </div>
